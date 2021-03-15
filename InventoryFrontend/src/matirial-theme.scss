@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic&subset=latin-ext");
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic&amp;subset=latin-ext");
+
+@import "~@angular/material/theming";
+
+@include mat-core();
+
+// Define a custom typography config that overrides the font-family // as well as the
+// `headlines ` and `body-1` levels.
+$custom-typography: mat-typography-config(
+  $font-family: 'Roboto, "Helvetica Neue", sans-serif',
+  $display-4: mat-typography-level(112px, 112px, 300),
+  $display-3: mat-typography-level(56px, 56px, 400),
+  $display-2: mat-typography-level(48px, 56px, 400),
+  $display-1: mat-typography-level(40px, 48px, 400),
+  $headline: mat-typography-level(36px, 42px, 400),
+  $title: mat-typography-level(32px, 40px, 500),
+  $subheading-2: mat-typography-level(26px, 32px, 400),
+  $subheading-1: mat-typography-level(24px, 30px, 400),
+  $body-2: mat-typography-level(20px, 26px, 500),
+  $body-1: mat-typography-level(16px, 24px, 500),
+  $caption: mat-typography-level(13px, 16px, 400),
+  $button: mat-typography-level(12px, 20px, 500),
+  // Line-height must be unit-less fraction of the font-size.
+    $input: mat-typography-level(16px, 1.125, 400),
+);
+@include mat-core($custom-typography);
+
+@include angular-material-typography($custom-typography);

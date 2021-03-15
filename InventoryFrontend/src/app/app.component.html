@@ -1,0 +1,33 @@
+<mat-drawer-container class="example-container" style="width: 100%">
+    <mat-drawer mode="side" opened fxFlex=40>
+        <div fxLayout="column" fxLayoutAlign="space-between start">
+            <div fxLayout="column" class="pd16-L" fxFlex=60>
+                <div class="pd8-LR pd32-TB">
+                    <span> Welcome to Inventory Management</span>
+                </div>
+
+                <div class="pd8-TB">
+                    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+                        <div fxLayout="column">
+                            <a routerLink="products">Home</a>
+                        </div>
+                        <div fxLayout="column">
+                            <a routerLink="products">Products</a>
+                        </div>
+                        <div fxLayout="column">
+                            <a routerLink="locations">Locations</a>
+                        </div>
+                        <div fxLayout="column">
+                            <a routerLink="products">Product Movement</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </mat-drawer>
+    <mat-drawer-content fxFlex=60>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>

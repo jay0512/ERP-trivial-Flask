@@ -1,0 +1,36 @@
+<div fxLayout="column" class="pd16" fxFlex>
+    <div fxLayout="column" fxFlex [formGroup]="productForm">
+
+        <div fxLayout="column" class="pd16-B" fxFlex=50>
+            <mat-form-field>
+                <mat-label>Product Name</mat-label>
+                <input matInput type="text" name="name" formControlName="name">
+                <button mat-button *ngIf="productForm['controls']['name'].value" matSuffix mat-icon-button
+                    aria-label="Clear" (click)="productForm['controls']['name'].setValue('')">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="productForm['controls']['name'].hasError('required')">
+                    name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="column" class="pd16-B" fxFlex=50>
+            <mat-form-field>
+                <mat-label>Product Description</mat-label>
+                <input matInput type="text" name="name" formControlName="description">
+                <button mat-button *ngIf="productForm['controls']['description'].value" matSuffix mat-icon-button
+                    aria-label="Clear" (click)="productForm['controls']['description'].setValue('')">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="column" class="pd16-B">
+            <button mat-flat-button color="primary" class="mrg8-R"
+                (click)="validate()?updateProduct():warning()">Update</button>
+            <button mat-stroked-button color="primary" (click)="close()">close</button>
+        </div>
+
+    </div>
+</div>
