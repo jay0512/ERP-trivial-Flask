@@ -16,6 +16,10 @@ import { LocationComponent } from './location/location.component';
 import { AddLocationComponent } from './location/add-location/add-location.component';
 import { EditLocationComponent } from './location/edit-location/edit-location.component';
 import { LocationAPIService } from './services/location-api.service';
+import { ProductMovementComponent } from './product-movement/product-movement.component';
+import { AddProductMovementComponent } from './product-movement/add-product-movement/add-product-movement.component';
+import { EditProductMovementComponent } from './product-movement/edit-product-movement/edit-product-movement.component';
+import { ReportComponent } from './product-movement/report/report.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { LocationAPIService } from './services/location-api.service';
     EditProductComponent,
     LocationComponent,
     AddLocationComponent,
-    EditLocationComponent
+    EditLocationComponent,
+    ProductMovementComponent,
+    AddProductMovementComponent,
+    EditProductMovementComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +47,6 @@ import { LocationAPIService } from './services/location-api.service';
   ],
   providers: [ProductAPIService, LocationAPIService],
   bootstrap: [AppComponent],
-  entryComponents: [AddProductComponent, EditProductComponent, AddLocationComponent, EditLocationComponent]
+  entryComponents: [AddProductComponent, EditProductComponent, AddLocationComponent, EditLocationComponent, AddProductMovementComponent, EditProductMovementComponent]
 })
 export class AppModule { }

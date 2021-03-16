@@ -1,0 +1,71 @@
+<div fxLayout="column" class="pd16" fxFlex>
+    <div fxLayout="column" fxFlex [formGroup]="productMovementForm">
+
+        <div fxLayout="column" class="pd16-B" fxFlex=50>
+            <mat-form-field>
+                <mat-label>Product Movement Time</mat-label>
+                <input matInput type="text" name="timestamp" formControlName="timestamp">
+                <button mat-button *ngIf="productMovementForm['controls']['timestamp'].value" matSuffix mat-icon-button
+                    aria-label="Clear" (click)="productMovementForm['controls']['timestamp'].setValue('')">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="productMovementForm['controls']['timestamp'].hasError('required')">
+                    DateTime is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="column" class="pd16-B" fxFlex=50>
+            <mat-form-field>
+                <mat-label>From Location</mat-label>
+                <input matInput type="number" name="from_location" formControlName="from_location">
+                <button mat-button *ngIf="productMovementForm['controls']['from_location'].value" matSuffix
+                    mat-icon-button aria-label="Clear"
+                    (click)="productMovementForm['controls']['from_location'].setValue('')">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="column" class="pd16-B" fxFlex=50>
+            <mat-form-field>
+                <mat-label>To Location</mat-label>
+                <input matInput type="number" name="to_location" formControlName="to_location">
+                <button mat-button *ngIf="productMovementForm['controls']['to_location'].value" matSuffix
+                    mat-icon-button aria-label="Clear"
+                    (click)="productMovementForm['controls']['to_location'].setValue('')">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="column" class="pd16-B" fxFlex=50>
+            <mat-form-field>
+                <mat-label>Product</mat-label>
+                <input matInput type="number" name="product" formControlName="product_id">
+                <button mat-button *ngIf="productMovementForm['controls']['product_id'].value" matSuffix mat-icon-button
+                    aria-label="Clear" (click)="productMovementForm['controls']['product_id'].setValue('')">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="column" class="pd16-B" fxFlex=50>
+            <mat-form-field>
+                <mat-label>QTY</mat-label>
+                <input matInput type="number" name="qty" formControlName="qty">
+                <button mat-button *ngIf="productMovementForm['controls']['qty'].value" matSuffix mat-icon-button
+                    aria-label="Clear" (click)="productMovementForm['controls']['qty'].setValue('')">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="column" class="pd16-B">
+            <button mat-flat-button color="primary" class="mrg8-R"
+                (click)="validate()?updateProductMovement():warning()">Update</button>
+            <button mat-stroked-button color="primary" (click)="close()">close</button>
+        </div>
+
+    </div>
+</div>

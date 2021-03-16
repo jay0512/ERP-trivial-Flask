@@ -1,0 +1,41 @@
+<div class="pd24" fxFlex=100>
+    <mat-card class="example-card" style="border-radius: 1rem; width: 720px !important;">
+        <mat-card-header class="pd8-T">
+            <mat-card-title>Product Balance Report by Location</mat-card-title>
+            <mat-card-subtitle>details</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-list fxLayout="row" fxLayoutAlign="space-around center" fxFlex>
+                <mat-list-item fxLayout="row" fxFlex>
+                    <div class="mat-body-2 fw-700" style="width: 40% !important;">Time</div>
+                    <div class="mat-body-2 fw-700" style="width: 20% !important;">From</div>
+                    <div class="mat-body-2 fw-700" style="width: 20% !important;">To</div>
+                    <div class="mat-body-2 fw-700" style="width: 20% !important;">Product</div>
+                    <div class="mat-body-2 fw-700" style="width: 10% !important;">Qty</div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+
+                <ng-container *ngFor="let productMovement of productMovements">
+                    <mat-list-item fxLayout="row" (click)="editDialog(productMovement)">
+                        <div class="mat-body-1 fw-500" style="width: 40% !important;">{{productMovement?.timestamp}}
+                        </div>
+                        <div class="mat-body-1 fw-500" style="width: 20% !important;">{{productMovement?.from_location}}
+                        </div>
+                        <div class="mat-body-1 fw-500" style="width: 20% !important;">{{productMovement?.to_location}}
+                        </div>
+                        <div class="mat-body-1 fw-500" style="width: 20% !important;">{{productMovement?.product_id}}
+                        </div>
+                        <div class="mat-body-1 fw-500" style="width: 10% !important;">{{productMovement?.qty}}
+                        </div>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+
+                </ng-container>
+
+            </mat-list>
+
+        </mat-card-content>
+
+    </mat-card>
+
+</div>

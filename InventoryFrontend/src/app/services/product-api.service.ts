@@ -17,6 +17,11 @@ export class ProductAPIService {
     return this.http.get<Product[]>(url);
   }
 
+  getProduct(product_id: number): Observable<Product> {
+    let url = environment.api_url + '/products/' + product_id;
+    return this.http.get<Product>(url);
+  }
+
   addProduct(product: Product) {
     let url = environment.api_url + '/products';
     return this.http.post(url, product);

@@ -1,4 +1,5 @@
-from main import db,ma
+from main import db, ma
+
 
 class Product(db.Model):
     __tablename__ = 'Product'
@@ -11,9 +12,11 @@ class Product(db.Model):
         self.name = name
         self.description = description
 
+
 class ProductSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Product
+
 
 class Location(db.Model):
     __tablename__ = 'Location'
@@ -26,23 +29,30 @@ class Location(db.Model):
         self.name = name
         self.description = description
 
+
 class LocationSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Location
+
 
 class ProductMovement(db.Model):
     __tablename__ = 'ProductMovement'
 
     movement_id = db.Column(db.Integer, primary_key=True)
     timestamp = db.Column(db.DateTime())
-    from_location = db.Column(db.String())
-    to_location = db.Column(db.String())
+    from_location = db.Column(db.Integer)
+    to_location = db.Column(db.Integer)
     product_id = db.Column(db.Integer)
     qty = db.Column(db.Integer)
 
-    def __init__(self, timestamp, from_location,to_location,product_id,qty):
+    def __init__(self, timestamp, from_location, to_location, product_id, qty):
         self.timestamp = timestamp
         self.from_location = from_location
         self.to_location = to_location
         self.product_id = product_id
         self.qty = qty
+
+
+class ProductMovementSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = ProductMovement

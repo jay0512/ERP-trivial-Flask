@@ -1,0 +1,37 @@
+
+Total:
+
+select movement_id, 
+(select name from "Location" WHERE "ProductMovement".from_location = "Location".location_id ) fromName,
+(select name from "Location" WHERE "ProductMovement".to_location = "Location".location_id ) toName ,
+(select name from "Product" WHERE "ProductMovement".product_id = "Product".product_id ) productName ,
+qty
+from "ProductMovement";
+
+Report:
+
+
+select balance.productName, balance.locationName, SUM(balance.factor * balance.quantity) AS Stock
+FROM 
+(	select  
+	(select name from "Location" WHERE "ProductMovement".to_location = "Location".location_id ) locationName ,
+	(select name from "Product" WHERE "ProductMovement".product_id = "Product".product_id ) productName ,
+	NULLIF(sum(qty),0) as quantity, 
+        1 as factor
+	from "ProductMovement"
+	Group By "ProductMovement".product_id,"ProductMovement".to_location
+
+	UNION ALL
+
+	select  
+	(select name from "Location" WHERE "ProductMovement".from_location = "Location".location_id ) locationName ,
+	(select name from "Product" WHERE "ProductMovement".product_id = "Product".product_id ) productName ,
+	NULLIF(sum(qty),0) as quantity, 
+        -1 as factor
+	from "ProductMovement"
+	Group By "ProductMovement".product_id,"ProductMovement".from_location
+	
+)AS balance
+WHERE "balance".locationName NOTNULL
+Group By "balance".productName,"balance".locationName
+;
