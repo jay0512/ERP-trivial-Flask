@@ -6,7 +6,7 @@ from decimal import Decimal
 from sqlalchemy import desc, asc, Column, INTEGER
 from sqlalchemy.sql import func
 from sqlalchemy.orm import aliased
-
+from utilities import dateTimeConverter, decimalConverter
 
 # Products Manager
 
@@ -95,40 +95,13 @@ def putDBLocation(location):
 # ProductMovement Manager
 
 
-def myconverter(o):
-    if isinstance(o, datetime.datetime):
-        return o.__str__()
-
-
-class fakefloat(float):
-    def __init__(self, value):
-        self._value = value
-
-    def __repr__(self):
-        return str(self._value)
-
-
-def defaultencode(o):
-    if isinstance(o, Decimal):
-        # Subclass float with custom repr?
-        return fakefloat(o)
-    raise TypeError(repr(o) + " is not JSON serializable")
-
-
 def getDBProductMovements():
-
-    # select movement_id,
-    # (select name from "Location" WHERE "ProductMovement".from_location = "Location".location_id ) fromName,
-    # (select name from "Location" WHERE "ProductMovement".to_location = "Location".location_id ) toName ,
-    # (select name from "Product" WHERE "ProductMovement".product_id = "Product".product_id ) productName ,
-    # qty
-    # from "ProductMovement"
 
     with engine.connect() as con:
         rs = con.execute('select movement_id,timestamp,product_id,from_location,to_location,(select name from "Location" WHERE "ProductMovement".from_location="Location".location_id) fromName,(select name from "Location" WHERE "ProductMovement".to_location="Location".location_id) toName,(select name from "Product" WHERE "ProductMovement".product_id="Product".product_id) productName,qty from "ProductMovement";')
         response = [dict(row.items()) for row in rs]
 
-    return json.dumps(response, default=myconverter)
+    return json.dumps(response, default=dateTimeConverter)
 
 
 def getDBProductMovement(movement_id):
@@ -166,58 +139,8 @@ def putDBProductMovement(productMovement):
 
 def getDBProductBalanceByLocation():
 
-    # productMovementSet = ProductMovement.query.order_by(
-    #     asc(ProductMovement.movement_id))
-
-    # select balance.Product, balance.Warehouse, SUM(balance.factor * balance.quantity) AS Qty
-    # FROM
-    # (	select
-    # 	(select name from "Location" WHERE "ProductMovement".to_location = "Location".location_id ) Warehouse ,
-    # 	(select name from "Product" WHERE "ProductMovement".product_id = "Product".product_id ) Product ,
-    # 	NULLIF(sum(qty),0) as quantity,
-    #         1 as factor
-    # 	from "ProductMovement"
-    # 	Group By "ProductMovement".product_id,"ProductMovement".to_location
-
-    # 	UNION ALL
-
-    # 	select
-    # 	(select name from "Location" WHERE "ProductMovement".from_location = "Location".location_id ) Warehouse ,
-    # 	(select name from "Product" WHERE "ProductMovement".product_id = "Product".product_id ) Product ,
-    # 	NULLIF(sum(qty),0) as quantity,
-    #         -1 as factor
-    # 	from "ProductMovement"
-    # 	Group By "ProductMovement".product_id,"ProductMovement".from_location
-
-    # )AS balance
-    # WHERE "balance".Warehouse NOTNULL
-    # Group By "balance".Product,"balance".Warehouse
-    # ;
-
-    # query1 = db.session.query(ProductMovement.product_id.label('Product'), ProductMovement.to_location.label(
-    #     'Warehouse'), func.coalesce(func.sum(ProductMovement.qty), 0).label('quantity')).group_by(ProductMovement.product_id, ProductMovement.to_location)
-
-    # query1 = query1.add_column('factor',
-    #                            Column(1, INTEGER))
-
-    # print(query1)
-
-    # query2 = db.session.query(ProductMovement.product_id.label('Product'), ProductMovement.from_location.label(
-    #     'Warehouse'), func.coalesce(func.sum(ProductMovement.qty), 0).label('quantity')).group_by(ProductMovement.product_id, ProductMovement.from_location)
-
-    # query3 = query1.union_all(query2).subquery()
-
-    # print(query3)
-    # productMovementSet = db.session.query(query3.c.Product, query3.c.Warehouse, func.sum(query3.c.quantity)).filter(query3.c.Warehouse.isnot(None)).group_by(
-    #     query3.c.Product, query3.c.Warehouse).all()
-    # print(productMovementSet)
-
-    # productMovementSchema = ProductMovementSchema(many=True)
-    # productMovements = productMovementSchema.dump(productMovementSet)
-
     with engine.connect() as con:
         rs = con.execute('select balance.Product, balance.Warehouse, SUM(balance.factor * balance.quantity) AS balance FROM (	select  (select name from "Location" WHERE "ProductMovement".to_location = "Location".location_id ) Warehouse ,	(select name from "Product" WHERE "ProductMovement".product_id = "Product".product_id ) Product , NULLIF(sum(qty),0) as quantity, 1 as factor from "ProductMovement" Group By "ProductMovement".product_id,"ProductMovement".to_location UNION ALL select (select name from "Location" WHERE "ProductMovement".from_location = "Location".location_id ) Warehouse ,	(select name from "Product" WHERE "ProductMovement".product_id = "Product".product_id ) Product , NULLIF(sum(qty),0) as quantity, -1 as factor from "ProductMovement" Group By "ProductMovement".product_id,"ProductMovement".from_location )AS balance WHERE "balance".Warehouse NOTNULL Group By "balance".Product,"balance".Warehouse;')
         response = [dict(row.items()) for row in rs]
-        print(json.dumps(response, default=defaultencode))
 
-    return json.dumps(response, default=defaultencode)
+    return json.dumps(response, default=decimalConverter)

@@ -41,9 +41,11 @@ Very basic ERP to learn Flask API, SQLAlchemy, Mashmallow, PostgreSQL.
 
 #
 3. Product Movements
-**![](https://lh5.googleusercontent.com/Uv0ZrSM8Tll0nxB_fN_UfAKEIhjIin9bZotRgywfZuN9iZwg7RamwwpgaX1XbutNGRNZqGT6V38QZPqM_tCx_q68sttZaqa9_2SL2ddXn_MOF_V9nutV9iVOcEBmQdz4_lRP9hyc)**
+**![](https://lh4.googleusercontent.com/BDqcNpGXJHHUcq3VRBSAbhT20YMpV4Dqjg7qXM9-LGNHWrLV8i9iXcfAPHvTF9qbMtVklSuUNHRf_er_7BKNNhf3Gxz3_aWI_SK5sqWUP3Y-0dBsUG3S5AClpWQiyZMUvU4avoD7)**
 
 3.1 Add Product Movements
 **![](https://lh6.googleusercontent.com/wJjvtAs0stNVOrn1jCNrlwE8xwEHw2DSfYXbgH_ZFZjpqzF-FT2cGMACDO_nIAwFWDj46IH8pCPV3pjqj4BFtqVTSDsD32wHJny-QHZP5g9lsHs4gPfiRIyLa2LIt7m3WvVsk8Ip)**
 3.2 Update Product Movements
 **![](https://lh6.googleusercontent.com/iIDOXJ4RxeIQT7Azl2FCN4bqpbBbvfPTN760qvAg0A_lQ3IF5wNMXJfuWGv24lmcKHpRiq2ODomrS5PeMrWgE49znuQGpgJ5P6_JPD4eRsK4h81HIu3LvtW3ZVM2_YrYhyg-tsGE)**
+4. Report of Product movement by Location
+**![](https://lh6.googleusercontent.com/z3Mka-UvL14Gd3HzGykQr6VVjMoHICfbHHSYLKkic6a-mKgajS1zLa71KKEHToUhVLbCWmCl8yNv7dUVqTP9VLFIX-XUDTfwyK-4VdAwjXtojprH7YVkBT8LPmbplRKtOwEaivvh)**

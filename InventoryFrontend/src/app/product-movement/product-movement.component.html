@@ -19,9 +19,11 @@
                     <mat-list-item fxLayout="row" (click)="editDialog(productMovement)">
                         <div class="mat-body-1 fw-500" style="width: 40% !important;">{{productMovement?.timestamp}}
                         </div>
-                        <div class="mat-body-1 fw-500" style="width: 20% !important;">{{productMovement?.fromname}}
+                        <div class="mat-body-1 fw-500" style="width: 20% !important;">{{productMovement?.fromname ?
+                            productMovement?.fromname: '-'}}
                         </div>
-                        <div class="mat-body-1 fw-500" style="width: 20% !important;">{{productMovement?.toname}}
+                        <div class="mat-body-1 fw-500" style="width: 20% !important;">{{productMovement?.toname ?
+                            productMovement?.toname : '-'}}
                         </div>
                         <div class="mat-body-1 fw-500" style="width: 20% !important;">{{productMovement?.productname}}
                         </div>

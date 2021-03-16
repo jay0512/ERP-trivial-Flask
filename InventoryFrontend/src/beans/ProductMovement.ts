@@ -20,7 +20,7 @@ export class ProductMovement {
     @prop()
     qty: number;
 
-    forname: string = '';
+    fromname: string = '';
 
     toname: string = '';
 
