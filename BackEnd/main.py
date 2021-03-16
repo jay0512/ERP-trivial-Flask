@@ -3,6 +3,7 @@ from flask import jsonify, request
 import json
 
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import create_engine
 from flask_migrate import Migrate
 from flask_marshmallow import Marshmallow
 from manager import *
@@ -16,6 +17,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 migrate = Migrate(app, db)
+engine = create_engine('postgresql://postgres:admin@localhost:5432/Inventory')
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 

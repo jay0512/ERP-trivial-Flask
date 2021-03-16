@@ -8,14 +8,15 @@ select movement_id,
 qty
 from "ProductMovement";
 
+
+
 Report:
 
-
-select balance.productName, balance.locationName, SUM(balance.factor * balance.quantity) AS Stock
+select balance.Product, balance.Warehouse, SUM(balance.factor * balance.quantity) AS Qty
 FROM 
 (	select  
-	(select name from "Location" WHERE "ProductMovement".to_location = "Location".location_id ) locationName ,
-	(select name from "Product" WHERE "ProductMovement".product_id = "Product".product_id ) productName ,
+	(select name from "Location" WHERE "ProductMovement".to_location = "Location".location_id ) Warehouse ,
+	(select name from "Product" WHERE "ProductMovement".product_id = "Product".product_id ) Product ,
 	NULLIF(sum(qty),0) as quantity, 
         1 as factor
 	from "ProductMovement"
@@ -24,14 +25,14 @@ FROM
 	UNION ALL
 
 	select  
-	(select name from "Location" WHERE "ProductMovement".from_location = "Location".location_id ) locationName ,
-	(select name from "Product" WHERE "ProductMovement".product_id = "Product".product_id ) productName ,
+	(select name from "Location" WHERE "ProductMovement".from_location = "Location".location_id ) Warehouse ,
+	(select name from "Product" WHERE "ProductMovement".product_id = "Product".product_id ) Product ,
 	NULLIF(sum(qty),0) as quantity, 
         -1 as factor
 	from "ProductMovement"
 	Group By "ProductMovement".product_id,"ProductMovement".from_location
 	
 )AS balance
-WHERE "balance".locationName NOTNULL
-Group By "balance".productName,"balance".locationName
+WHERE "balance".Warehouse NOTNULL
+Group By "balance".Product,"balance".Warehouse
 ;

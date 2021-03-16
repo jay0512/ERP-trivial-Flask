@@ -20,6 +20,12 @@ export class ProductMovement {
     @prop()
     qty: number;
 
+    forname: string = '';
+
+    toname: string = '';
+
+    productname: string = '';
+
     constructor(
         movement_id: number,
         timestamp: Date,
