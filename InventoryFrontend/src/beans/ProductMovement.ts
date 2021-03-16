@@ -26,6 +26,10 @@ export class ProductMovement {
 
     productname: string = '';
 
+    product: string = '';
+    warehouse: string = ''
+    balance: number = 0;
+
     constructor(
         movement_id: number,
         timestamp: Date,

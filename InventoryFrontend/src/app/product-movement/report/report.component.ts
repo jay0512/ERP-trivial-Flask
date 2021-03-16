@@ -20,7 +20,7 @@ export class ReportComponent implements OnInit {
   }
 
   getProductMovements() {
-    this.productMovementApi.getProductMovements().subscribe(productMovements => {
+    this.productMovementApi.getProdusctReportByLocation().subscribe(productMovements => {
       console.log(productMovements);
       this.productMovements = productMovements;
       this.productMovements.forEach(element => {
